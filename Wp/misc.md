@@ -23,5 +23,9 @@ Then use **fcrackzip** to crack the password, maybe others as you like
 ```
 With respect to the usage of fcrackzip, please man it yourself.(flag{vjpw_wnoei})
 
-# 3. 
+# 3. 你竟然赶我走(buuoj.cn)
+Download and unzip the file and there is jpg file in it.
+Use the **hexedit** to check the hex and ascii code of jpg. Search the "flag" in ascii you will find the flag.(flag{stego_is_s0_bor1ing})
+
+# 4. 
 

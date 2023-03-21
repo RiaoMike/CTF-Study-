@@ -1,18 +1,19 @@
-# 1. File type identification
+# File
+## 1. File type identification
 
-## 1.1 file
+### 1.1 file
 a command in linux to show file type
 
-## 1.2 winhex 
+### 1.2 winhex 
 a commnd in windows to show file type through file header messgae
 
-## 1.3 incompelete or wrong file header 
+### 1.3 incompelete or wrong file header 
 ```bash
 # file example.png
 example.png: data
 ```
 
--------------------------------
+---
 Some useful file header
   1 JPEG (jpg)，file header：FFD8FF
   2 PNG (png)，file header：89504E47
@@ -45,60 +46,118 @@ Some useful file header
  29 Quicktime (mov)，file header：6D6F6F76
  30 Windows Media (asf)，file header：3026B2758E66CF11
  31 MIDI (mid)，file header：4D546864
-------------------------------------
 
-# 2. File separation
 
-## 2.1 binwalk
+## 2. File separation
+
+### 2.1 binwalk
 analyse file: show hidden files that may exist
 > binwalk filename
 
 extract file
 > binewalk -e filename
 
-## 2.2 foremost
+### 2.2 foremost
 
 a tool similar to binwalk
 > foremost filename -o output-dir
 
-## 2.3 dd
+### 2.3 dd
 
 the hardest one, could manual separation files
 > dd if=source-file of=tar-file bs=block-size count=blocks-number skip=numbers-to-skip
-> if:   input filename
-> of:   output filename
-> bs:   set the read and write block size
-> count:    set the block numbers
-> skip: skip the first $numbers blocks
+
+1. if:   input filename
+2. of:   output filename
+3. bs:   set the read and write block size
+4. count:    set the block numbers
+5. skip: skip the first $numbers blocks
 
 always usage: binwalk analyse + dd manual separation
 
-## 2.4 winhex
+### 2.4 winhex
 in windows
 not recommand, usually use **010 editor** in windows
 
-## 2.5 010 Editor
+### 2.5 010 Editor
 > give you a txt file full of hex code, import it to 010editor and then save as a rar(or others, it's depends on the file header)
 
-## 2.6 hexedit
+### 2.6 hexedit
 in linux you can use hexedit, it's powerful and free
 
 
-# 3. File merge
+## 3. File merge
 
-## 3.1 linux
+### 3.1 linux
 > cat file1 file2...filen > tarfile
+
 > cat file* > tarfile
 
 **after the file is merged, the file header may alse need to be added**
-That is, although you have merged the file to target, for example a jpg, the picture still can't see. And $$file example.jpg$$ shows you it's a data, then you need to add the file header manully.
+That is, although you have merged the file to target, for example a jpg, the picture still can't see. And $file example.jpg$ shows you it's a data, then you need to add the file header manully.
 
 integrity check:    md5sum filename
 
-## 3.2 windows
+### 3.2 windows
 > copy /B file1+file2+file3 tarfile
 
-integrity check:    certutil -hashfile filename md5    
+integrity check:    certutil -hashfile filename md5
+
+
+# Picture
+## 1. Picture file hidden write
+
+### 1.1 Firework
+
+### 1.2 Exif
+
+In linux, you can use **exiv2** to search for the exif information.
+
+### 1.3 stegsolve
+
+当两张jpg图片外观、大小、像素都基本相同时，可以考虑进行结合分析，即将两个文件的像素RGB值进行XOR、ADD、SUB等操作，看能否得到有用的信息，stegsolve可以方便的进行这些操作.
+
+Scenes to be used: two pictures near same
+
+### 1.4* LSB(Least Significant Bit)
+
+将嵌入信息取代载体图片的最低位比特，RGB中每一种原色占八位.通过修改像素中最低位的1bit来达到隐藏的效果.
+
+Tool: stegsolve, zsteg, wbstego4, python
+
+recommand: zsteg
+list all the possible text
+> zsteg filename
+
+wbstego4: most used for bmp file
+
+### 1.5 tweakPNG
+
+用于修改png图像文件的元信息
+文件头正常却无法打开文件，可利用tweakpng修改CRC
+用tweakpng查看CRC的错误以及正确值，然后用hexedit进行更改
+有时CRC没有错误，但图片的高度和宽度发生了错误，需要根据CRC计算出图片正确的高度和宽度，用python脚本计算
+
+### 1.6 bftools
+decrypt the encrypted picture in windows
+> Bftools.exe decode braincopter sourcefile --output outfile
+>
+> Bftools.exe run outfile
+
+### 1.7 slienteye
+decrypt the encrypted picture in windows
+
+### 1.8 stegdetect
+Most used for jpeg
+Analyse the way that jpg encrypted(JSteg, JPHide,OutGuess,F5,appendX...)
+> stegdetect xxx.jpg
+
+Once you get the encryption, you can decrypt the jpg with corresponding methods.(Google by yourself)
+
+### 1.9 QRcode
+Some questions reverse the black and white of the picture 
+
+
 
 
 
