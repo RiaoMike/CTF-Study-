@@ -32,6 +32,7 @@ Use the **hexedit** to check the hex and ascii code of jpg. Search the "flag" in
 The picture can not open at first which remind you that a error happened in CRC code. Use tweakpng or stegsolve to show the right CRC. Here I used the stegsolve because it gives the width and height at same time. 
 
 > stegsolve and analyse dabai.png
+
 ![dabai.png](../img/dabai_analyse.png)
 
 You can see the CRC right now is "6d7c7135" and calculated CRC is "8e14dfcf".

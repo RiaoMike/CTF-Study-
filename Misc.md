@@ -166,10 +166,21 @@ Once you get the encryption, you can decrypt the jpg with corresponding methods.
 Some questions reverse the black and white of the picture 
 
 
+# Zip file
+
+## 1. pseudo encryption
+zip文件通过一位标识符来显示是否加密，在每个文件的文件目录字段有一位专门标识了文件是否加密，设置为0表示未加密.设置为0后能解压则为伪加密，否则为真加密.
+
+找到**504b0102**，再往后数九到10位(包括504b)，将其置为0000
+
+rar文件 从第一位往后数到第24位，将尾数改为0即可破解伪加密.
+
+## 2. brute force(暴力破解)
+
+### 2.1 archpr.exe(windows)
 
 
-
-
+### 2. Hashcat
 
 
 
