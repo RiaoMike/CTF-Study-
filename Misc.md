@@ -113,7 +113,10 @@ integrity check:    certutil -hashfile filename md5
 
 In linux, you can use **exiv2** to search for the exif information.
 
-### 1.3 stegsolve
+### 1.3* stegsolve
+Powerful!!!
+It can analyse the CRC value, as well as width and height, see [dabai](Wp/misc.md)
+Just use file formate option in Analyse list.
 
 当两张jpg图片外观、大小、像素都基本相同时，可以考虑进行结合分析，即将两个文件的像素RGB值进行XOR、ADD、SUB等操作，看能否得到有用的信息，stegsolve可以方便的进行这些操作.
 
@@ -131,12 +134,17 @@ list all the possible text
 
 wbstego4: most used for bmp file
 
-### 1.5 tweakPNG
+### 1.5* tweakPNG
 
 用于修改png图像文件的元信息
 文件头正常却无法打开文件，可利用tweakpng修改CRC
 用tweakpng查看CRC的错误以及正确值，然后用hexedit进行更改
 有时CRC没有错误，但图片的高度和宽度发生了错误，需要根据CRC计算出图片正确的高度和宽度，用python脚本计算
+
+In linux you may need to use wine to operate the tweakpng like this
+> wine path/tweakpng.exe xxx.png
+
+Or you can just use stegsolve.
 
 ### 1.6 bftools
 decrypt the encrypted picture in windows

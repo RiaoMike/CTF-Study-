@@ -27,5 +27,17 @@ With respect to the usage of fcrackzip, please man it yourself.(flag{vjpw_wnoei}
 Download and unzip the file and there is jpg file in it.
 Use the **hexedit** to check the hex and ascii code of jpg. Search the "flag" in ascii you will find the flag.(flag{stego_is_s0_bor1ing})
 
-# 4. 
+# 4. 大白(buuoj.cn)
 
+The picture can not open at first which remind you that a error happened in CRC code. Use tweakpng or stegsolve to show the right CRC. Here I used the stegsolve because it gives the width and height at same time. 
+
+> stegsolve and analyse dabai.png
+![dabai.png](../img/dabai_analyse.png)
+
+You can see the CRC right now is "6d7c7135" and calculated CRC is "8e14dfcf".
+Then use hexedit to modify the CRC area and Ctr-X to save. After that the picture can be successfully open, but it is only half.
+
+Double the height of png from 0100 to 0200 with hexedit, and calculate the new CRC with tweakpng(this time stegsolve can't work). Modify the CRC to new value(bffcc552) and then you can find the flag.(flag{He1l0_d4_ba1})**Notice the digits and characters**
+
+
+# 5. 
