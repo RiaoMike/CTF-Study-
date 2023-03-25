@@ -50,7 +50,7 @@ Some useful file header
 
 ## 2. File separation
 
-### 2.1 binwalk
+### 2.1* binwalk
 analyse file: show hidden files that may exist
 > binwalk filename
 
@@ -82,7 +82,7 @@ not recommand, usually use **010 editor** in windows
 ### 2.5 010 Editor
 > give you a txt file full of hex code, import it to 010editor and then save as a rar(or others, it's depends on the file header)
 
-### 2.6 hexedit
+### 2.6** hexedit
 in linux you can use hexedit, it's powerful and free
 
 
@@ -105,13 +105,14 @@ integrity check:    certutil -hashfile filename md5
 
 
 # Picture
-## 1. Picture file hidden write
+## 1. Picture file hidden write(stego)
 
 ### 1.1 Firework
 
-### 1.2 Exif
+### 1.2* Exiftool
 
-In linux, you can use **exiv2** to search for the exif information.
+In linux, you can use **exiftool** to search for the exif information where can hide important data.
+For example, in arch you can use **yay -S perl-image-exiftool** to download it.
 
 ### 1.3* stegsolve
 Powerful!!!
@@ -178,6 +179,14 @@ rar文件 从第一位往后数到第24位，将尾数改为0即可破解伪加�
 ## 2. brute force(暴力破解)
 
 ### 2.1 archpr.exe(windows)
+
+### 2.2* unzip, unrar, tar
+
+### 2.3 Rarcrack
+It's a multi-threads encryption tool, and it supports zip,rar,7z.
+> rarcrack filename [--threads NUM] [--type rar|zip|7z]
+
+You can speed up by modifying the .xml file in the same directory.
 
 
 ### 2. Hashcat
