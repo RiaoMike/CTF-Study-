@@ -48,7 +48,7 @@ There is an exe file in the zip file. Use **file** command to KEY.exe, it show t
 That hint us to transform the file to jpg file with base64 encryption. There is a lot of website you can find with google. Then you'll get a QR code.
 ![QR_code.png](../img/base64-image.png)
 
-Use **zbarimg** or QR-scanner in weixin as you to scan it.(flag{dca57f966e4e31fd5b15417da63269})
+Use **zbarimg** or QR-scanner in weixin as you like to scan it.(flag{dca57f966e4e31fd5b15417da63269})
 
 # 6. 乌镇峰会种图
 Just like 3.
@@ -76,5 +76,39 @@ It's a LSB questions. Just do as 8.
 Save as binary and **strings** the data file, you can see the security words.
 (flag{st3g0_saurus_wr3cks})
 
-# 10. 
+# 10. 另一个世界
+
+It seems that everything is normal about the monster.jpg.
+After trying all tools you can use, you may find a binary string in the end with the **strings** command.
+Transform the binary string to ascii, you can see the flag.(flag{koekj3s})
+
+# 11. 神秘龙卷风
+There is a rar file which you can easily encrypt using rarcrack.
+Then you'll get a strange txt file full of '+','.','>'. Guess that the '.>' is just separator and the number of '+' represent for something. We transform the number of '+' to ascii code in every region separating by '.>' with python.
+```python
+ txt = ''
+ with open('./mystery.txt','r') as file:
+     count = 0
+     ch = file.read(1)
+     while ch:
+         if ch == '+':
+             count += 1
+ 
+         elif ch == '.':
+             txt += chr(count)
+             count = 0
+             # read the '>'
+             file.read(1)
+ 
+         ch = file.read(1)
+ 
+ print(txt)
+```
+Run the code we get the flag.(flag{e4bbef8bdf9743f8bf5b727a9f6332a8})
+
+# 12. 
+
+
+
+
 
