@@ -189,7 +189,79 @@ It's a multi-threads encryption tool, and it supports zip,rar,7z.
 You can speed up by modifying the .xml file in the same directory.
 
 
-### 2. Hashcat
+### 2.* Hashcat
 
+# Forensic
 
+## 1.** Wireshark
 
+### 1.1 Filter
+1. ip 
+ip.src eq x.x.x.x or|and ip.dst eq x.x.x.x or|and ip.addr eq x.x.x.x
+
+2. port
+tcp.port eq 80 or udp.port eq 80
+tcp.dstport == 80
+tcp.srcport == 80
+tcp.port >= 1 and tcp.port <= 80
+
+3. protocal
+tcp/udp/arp/icmp/http/ftp/dns/ip
+
+4. mac
+
+5. packet length
+udp.length == 26
+tcp.len >= 7
+ip.len == 94
+frame.len == 119
+
+6. **http**
+http.request.method == "GET"
+http.request.method == "POST"
+http.request.uri == "/img/xxx.gif"
+http contains "GET"
+http contains "HTTP/1."
+http contains "flag"
+http contains "key"
+tcp contains "flag"
+You can use '||' or '&&' to combine
+
+The most easy one, flag just hide in the packet, we can filt with **contains**
+
+### 1.2 Protocol Hierarchy(协议分级) 
+查看主要流量是在哪个包中
+Statistics -> Protocol hierarchy
+
+### 1.3 Protocol Analyse
+![protocol-analyse.png](./img/protocol-analyse.png)
+
+### 1.4 Stream aggregation(流汇聚)
+Key point in http streams
+1. HTML中直接包含重要信息
+2. 上传或下载文件内容,通常包含文件名,hash值等关键信息,常用POST请求上传
+3. 一句话木马,POST请求,内容包含eval,内容使用base64加密
+
+### 1.5 Data extraction
+1. auto extract http content
+> file -> export objects -> http
+
+2. manual extract
+> 右键 -> export packet bytes
+
+## 2. Wireless packet
+
+### 2.1 aircrack-ng
+Used to crack wifi password.
+
+aircrack-ng xxx.cap -w pass.txt
+
+### 2.2 USB flow
+
+一般涉及键盘击键,鼠标移动与点击,存储设备的明文传输通信,USB无线网卡网络传输内容
+
+键盘击键: apply as column at first
+1. file -> export packet dissections -> .csv
+2. tshark
+
+鼠标流量:
