@@ -260,8 +260,30 @@ aircrack-ng xxx.cap -w pass.txt
 
 一般涉及键盘击键,鼠标移动与点击,存储设备的明文传输通信,USB无线网卡网络传输内容
 
-键盘击键: apply as column at first
+#### 键盘击键: apply as column at first
+
+Manual
 1. file -> export packet dissections -> .csv
 2. tshark
 
-鼠标流量:
+Auto
+Use [**UsbMiceDataHacker**](https://github.com/WangYihang/UsbMiceDataHacker)
+> python UsbMiceDataHacker.py example.pcap out.png
+
+#### 鼠标流量:
+
+Manual
+> tshark -r example.pcap -T fields -e usb.capdata > data
+
+Then use **gnuplot** to show the picture.
+
+Auto
+Use [**UsbKeyboardDataHacker**](https://github.com/WangYihang/UsbKeyboardDataHacker)
+> python UsbKeyDataHacker.py example.pcap
+
+## 3. HTTPS traffic packet analyse
+
+HTTPS流量经过TLS协议加密过,需要导入key才能看到原始的HTTP流量
+
+> Edit -> Preferences -> Protocols -> RSA keys
+

@@ -106,7 +106,15 @@ Then you'll get a strange txt file full of '+','.','>'. Guess that the '.>' is j
 ```
 Run the code we get the flag.(flag{e4bbef8bdf9743f8bf5b727a9f6332a8})
 
-# 12. 
+# 12. 荷兰宽带数据泄漏
+
+看到题目是关于宽带的,再看下载的文件中为conf.bin
+google发现这是一个路由器配置文件,可以用**routepassview**进行查看
+![router.png](../img/router.png)
+
+The flag is username's value, but I dont's know why.
+
+# 13. 
 
 
 
