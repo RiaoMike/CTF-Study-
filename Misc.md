@@ -166,6 +166,11 @@ Once you get the encryption, you can decrypt the jpg with corresponding methods.
 ### 1.9 QRcode
 Some questions reverse the black and white of the picture 
 
+## 2. Wav Stego
+
+### 2.1 audacity
+Powerful audio processing software
+
 
 # Zip file
 

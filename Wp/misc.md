@@ -114,7 +114,16 @@ google发现这是一个路由器配置文件,可以用**routepassview**进行�
 
 The flag is username's value, but I dont's know why.
 
-# 13. 
+# 13. 假如给我三天光明
+In the file you can see a .jpg and a .zip(in fact a .rar, you can use file cmd to easily show)
+
+Modify the suffix '.zip' to '.rar', then you need a password.
+Open the picture you see <<Halln KaiLe>>, a story about blind, in the bottom of which is some strange symbols. RIGHT! That's braille!(盲文)
+![blind.png](../img/blind.png)
+Search the table you can find the password is **kmdonowg**
+There is an audio in the rar. Use **audacity** to open it, the waveform is just a Morse code.
+![morse.png](../img/morse.png)
+Google youself to find the flag corresponding to the morse code.
 
 
 
