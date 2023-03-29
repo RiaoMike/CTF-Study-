@@ -85,6 +85,8 @@ Transform the binary string to ascii, you can see the flag.(flag{koekj3s})
 # 11. 神秘龙卷风
 There is a rar file which you can easily encrypt using rarcrack.
 Then you'll get a strange txt file full of '+','.','>'. Guess that the '.>' is just separator and the number of '+' represent for something. We transform the number of '+' to ascii code in every region separating by '.>' with python.
+
+** In fact, it's a program language called brainfuck**
 ```python
  txt = ''
  with open('./mystery.txt','r') as file:
@@ -125,7 +127,33 @@ There is an audio in the rar. Use **audacity** to open it, the waveform is just 
 ![morse.png](../img/morse.png)
 Google youself to find the flag corresponding to the morse code.
 
+# 14. 九连环
 
+Use binwalk to check the jpg file and find a zip file.
+```
+# binwalk -e 123456cry.jpg
+```
+There is a dir and zip file in the .jpg.extracted 
+Binwalk the 4C68.zip you can see the file in it is just 'asd', binwalk has help us unzip the file in the first step.(In fact it's a pseudo encryption伪加密). So we don't need to care it anymore.
 
+cd acd, the password of qwe.zip must hide in the jpg.
+But after trying every tools, I can find nothing. Then I look at other's wp and find a tool called **steghide**.
+Use it like this:
+```
+# steghide extract -sf stegfile
+```
+Then we get the password for the zip. Unzip the file we get the flag.
 
+# 15. Snake(https://buuoj.cn/challenges#snake)
 
+As a routine, unzip the file and binwalk the jpg.
+There is a 'cipher' and 'key' in the zip.
+
+Show the key there is a base64 string, decode it you can see the words "What is Nicki Minaj's favorite song that refers to snakes?"
+
+Google you get the key "anaconda"(Guess it)
+![anaconda.png](../img/anaconda.png)
+
+The next step is what I searched online. 
+Use this web to decode the cipher file.[serpent](http://serpent.online-domain-tools.com/)
+(flag{who_knew_serpent_cipher_existed})

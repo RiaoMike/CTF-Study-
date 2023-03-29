@@ -57,9 +57,10 @@ analyse file: show hidden files that may exist
 extract file
 > binewalk -e filename
 
-### 2.2 foremost
+### 2.2* foremost
+Use if binwalk not take effect
 
-a tool similar to binwalk
+a powerful tool similar to binwalk
 > foremost filename -o output-dir
 
 ### 2.3 dd
@@ -147,23 +148,28 @@ In linux you may need to use wine to operate the tweakpng like this
 
 Or you can just use stegsolve.
 
-### 1.6 bftools
+### 1.6* Steghide
+
+Find the hidden information in the stego file.
+> steghide extract -sf stegfile
+
+### 1.7 bftools
 decrypt the encrypted picture in windows
 > Bftools.exe decode braincopter sourcefile --output outfile
 >
 > Bftools.exe run outfile
 
-### 1.7 slienteye
+### 1.8 slienteye
 decrypt the encrypted picture in windows
 
-### 1.8 stegdetect
+### 1.9 stegdetect
 Most used for jpeg
 Analyse the way that jpg encrypted(JSteg, JPHide,OutGuess,F5,appendX...)
 > stegdetect xxx.jpg
 
 Once you get the encryption, you can decrypt the jpg with corresponding methods.(Google by yourself)
 
-### 1.9 QRcode
+### 1.10 QRcode
 Some questions reverse the black and white of the picture 
 
 ## 2. Wav Stego
@@ -192,6 +198,8 @@ It's a multi-threads encryption tool, and it supports zip,rar,7z.
 > rarcrack filename [--threads NUM] [--type rar|zip|7z]
 
 You can speed up by modifying the .xml file in the same directory.
+
+### 2.4 Brainfuck and ook!
 
 
 ### 2.* Hashcat
