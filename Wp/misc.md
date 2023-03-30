@@ -157,3 +157,16 @@ Google you get the key "anaconda"(Guess it)
 The next step is what I searched online. 
 Use this web to decode the cipher file.[serpent](http://serpent.online-domain-tools.com/)
 (flag{who_knew_serpent_cipher_existed})
+
+# 16. [GXYCTF2019]佛系青年
+
+伪加密+[与佛论禅](https://www.keyfc.net/bbs/tools/tudoucode.aspx)
+> flag{w0_fo_ci_Be1}
+
+# 17. 菜刀666(https://buuoj.cn/challenges#%E8%8F%9C%E5%88%80666)
+
+The subject is much difficult than before.
+
+See the Wp here: [666](https://blog.csdn.net/qq1124794084/article/details/79125175/)
+
+# 18. 
