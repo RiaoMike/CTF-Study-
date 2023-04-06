@@ -193,13 +193,16 @@ rar文件 从第一位往后数到第24位，将尾数改为0即可破解伪加�
 
 ### 2.2* unzip, unrar, tar
 
-### 2.3 Rarcrack
+### 2.3 fcrackzip
+Powerful zip file encryption.
+
+### 2.4 Rarcrack
 It's a multi-threads encryption tool, and it supports zip,rar,7z.
 > rarcrack filename [--threads NUM] [--type rar|zip|7z]
 
 You can speed up by modifying the .xml file in the same directory.
 
-### 2.4 Brainfuck and ook!
+### 2.5 Brainfuck and ook!
 
 
 ### 2.* Hashcat

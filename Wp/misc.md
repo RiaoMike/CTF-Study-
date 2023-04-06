@@ -169,4 +169,21 @@ The subject is much difficult than before.
 
 See the Wp here: [666](https://blog.csdn.net/qq1124794084/article/details/79125175/)
 
-# 18. 
+# 18. 神奇的二维码 
+
+You get a Bitcoin picture for fun. Use binwalk you find some rar file in it.
+[Bitcoin.png](../img/Bitcoin.png)
+
+There are four rar file and some other file in the directory. You can find that 17012.rar, 7104.rar, 716A.rar have nothing new and 18394.rar need a password.
+
+The flag.jpg is just a elicit, cat the encode.txt you find a base64 string, decode it on web and password is **asdfghjkl1234567890**
+
+Then use the password before to unrar the '看看flag...'. But what depressing us is content is the flag.jpg
+
+Finally we are going to see the flag.doc and 18394.rar. Use [python script](../CTFPython/MultiBase64.py) to decode the multi-base64 string(flag.doc).
+We get the password **comEON_YOuAreSOSoS0great**, use which to unrar the 18394.rar and there is a good.wav.
+
+Open the wav with **audacity**, the wave shape is obviously a morse code. Docode it in google we get the flag.(flag{morseisveryveryeasy})
+[Bitcoin_morse.png](../img/Bitcoin_morse.png)
+
+# 19. 
