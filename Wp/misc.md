@@ -172,7 +172,7 @@ See the Wp here: [666](https://blog.csdn.net/qq1124794084/article/details/791251
 # 18. 神奇的二维码 
 
 You get a Bitcoin picture for fun. Use binwalk you find some rar file in it.
-[Bitcoin.png](../img/Bitcoin.png)
+![Bitcoin.png](../img/Bitcoin.png)
 
 There are four rar file and some other file in the directory. You can find that 17012.rar, 7104.rar, 716A.rar have nothing new and 18394.rar need a password.
 
@@ -184,6 +184,6 @@ Finally we are going to see the flag.doc and 18394.rar. Use [python script](../C
 We get the password **comEON_YOuAreSOSoS0great**, use which to unrar the 18394.rar and there is a good.wav.
 
 Open the wav with **audacity**, the wave shape is obviously a morse code. Docode it in google we get the flag.(flag{morseisveryveryeasy})
-[Bitcoin_morse.png](../img/Bitcoin_morse.png)
+![Bitcoin_morse.png](../img/Bitcoin_morse.png)
 
 # 19. 
