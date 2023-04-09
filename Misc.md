@@ -86,6 +86,9 @@ not recommand, usually use **010 editor** in windows
 ### 2.6** hexedit
 in linux you can use hexedit, it's powerful and free
 
+### 2.7 ghex
+You can insert data to the file
+
 
 ## 3. File merge
 
