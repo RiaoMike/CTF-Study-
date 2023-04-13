@@ -186,4 +186,15 @@ We get the password **comEON_YOuAreSOSoS0great**, use which to unrar the 18394.r
 Open the wav with **audacity**, the wave shape is obviously a morse code. Docode it in google we get the flag.(flag{morseisveryveryeasy})
 ![Bitcoin_morse.png](../img/Bitcoin_morse.png)
 
-# 19. 
+# 19. 梅花香自苦寒来
+
+You get a jpg and you see '图穷匕现' in it. There is nothing more except some comment in exif.
+
+While **strings** the jpg you can see a very very long hex string.
+Convert it to ascii in web, you get something like ... coodinates?
+Format the result.txt in a way you like(for example vim, python...) and use gnuplot to print the graph where you see a QR code.
+
+[meihua.png](../img/meihua.png)
+Scan it to get flag.flag{40fc0a979f759c8892f4dc045e28b820}
+
+# 20. 
