@@ -172,7 +172,11 @@ Analyse the way that jpg encrypted(JSteg, JPHide,OutGuess,F5,appendX...)
 
 Once you get the encryption, you can decrypt the jpg with corresponding methods.(Google by yourself)
 
-### 1.10 QRcode
+### 1.10 outguess
+A tool for steganography.
+Allow the insertion of hidden information into the redundant bits of data sources.
+
+### 1.11 QRcode
 Some questions reverse the black and white of the picture 
 
 ## 2. Wav Stego
