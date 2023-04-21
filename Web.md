@@ -13,7 +13,7 @@ Here are some basic steps of union injection.
 
 See you need to upload the **$id**
 
-You can put "/?id=" + followings
+You can put "/?id=" + followings:
 1. 1 or 1=1--+
 2. 1' or 1=1--+
 3. 1" or 1=1--+
@@ -27,6 +27,14 @@ You can find that the correct closing lead to a normal reflect instead of ERROR.
 
 We assume that $id closed by single quote, then use **order** to find the columns.
 
-Try """1' order by 1--+""" and then """1' order by 2--+""", until errors. That's the column number.
+Try 
+"""
+1' order by 1--+
+""" 
+and then 
+"""
+1' order by 2--+
+"""
+ until errors. That's the column number.
 
 ### 3. 
