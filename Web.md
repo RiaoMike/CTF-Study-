@@ -17,6 +17,8 @@ Some useful url encode
 - [1. Union-based](#1-Union-based-Injection)
 - [2. Error-based](#2-Error-based-Injection)
 - [3. Boolean Blind](#3-Boolean-Blind-Injection)
+- [4. Time Blind](#4-Time-Blind-Injection)
+- [5. Stacked](#5-Stacked-Injection)
 
 ## 1. Union-based Injection
 
@@ -200,6 +202,10 @@ Note that LIMIT 0,1 is necessary otherwise an (subquery returns more than 1 row)
 ```
 
 method 2: use benchmark()
+
+## 5. Stacked Injection
+
+
 
 
 
