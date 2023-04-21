@@ -13,7 +13,7 @@ Some useful url encode
 5. %27: "'"
 ...
 
-**Content**
+# Content
 - [1. Union-based](#1-Union-based-Injection)
 - [2. Error-based](#2-Error-based-Injection)
 - [3. Boolean Blind](#3-Boolean-Blind-Injection)
