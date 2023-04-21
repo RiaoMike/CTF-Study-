@@ -16,6 +16,7 @@ Some useful url encode
 **Content**
 - [1. Union-based](#1-Union-based-Injection)
 - [2. Error-based](#2-Error-based-Injection)
+- [3. Boolean Blind](#3-Boolean-Blind-Injection)
 
 ## 1. Union-based Injection
 
@@ -99,7 +100,7 @@ Finally, you got the "id,username,password" columns in table users.
 
 ## 2. Error-based Injection
 
-## 3. Bool Blind Injection
+## 3. Boolean Blind Injection
 
 ## 4. Time Blind Injection
 
