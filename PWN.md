@@ -26,7 +26,7 @@ Dynamic debug
 
 # Binary Basic
 
-## 1. c_source_code to elf file
+## c_source_code to elf file
 
 1. C code(p1.c p2.c) --(compiler: gcc -S)> Assembly(p1.s p2.s)
 > note that we omit the include step
@@ -34,7 +34,7 @@ Dynamic debug
 2. Assebly(p1.s p2.s) --(compiler: gcc -c)> Object(p1.o p2.o)
 3. Object(p1.o p2.o) --(linker: gcc)> Executable(p)
 
-### executable file
+## executable file
 
 windows:PE
     1. .exe
@@ -46,7 +46,7 @@ linux:**ELF**
     2. .so(dynamic link library)
     3. .a(static link library)
 
-### ELF file structure
+## ELF file structure
 
 .elf => {header1/2, sections, header2/2}
 
@@ -71,6 +71,21 @@ header2/2 => {Section Header table}
 ![elffile.png](./img/elf_file.png)
 More on [this](https://luomuxiaoxiao.com/?p=139)
 
+## Program Load and Run
+
+Linking View: on disk to show different function
+
+Execution View: on memory to show different read-write Permission
+
+
+### 1. objdump
+display information of object file, such as a.out
+```
+objdump -s elf
+```
+
+### 2. cat /proc/pid/maps
+objdump display the disk view, while this diaplay the memory view
 
 
 
