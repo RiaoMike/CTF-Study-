@@ -2,10 +2,6 @@ import sys
 import os
 import extended_gcd
 
-info = """
-请尽量输入200以上素数，使n大于中文和英文的Unicode编码范围
-"""
-print(info)
 # p, q = map(int, sys.argv[1:])
 p, q = map(int, (input('请输入素数p q: ').split()))
 
