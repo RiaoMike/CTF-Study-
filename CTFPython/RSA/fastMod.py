@@ -1,18 +1,25 @@
 
-# 快速幂取模算法
-def fastMod(a, b, c=1):
-    if b == 0:
-        return 1
-    elif b == 1:
-        return a % c
+# 快速乘积
+def q_mul(a, b, n):
+    result = 0
+    while b:
+        if b & 1:
+            result = (result + a) % n
+        a = (a + a) % n
+        b //= 2
+    return result
 
-    tmp = fastMod(a, b // 2, c)
-    if b % 2 == 0:
-        return tmp * tmp % c
-    else:
-        return tmp * tmp * a % c
+# 快速幂取模算法
+def q_mod(a, b, n=1):
+    result = 1
+    while b:
+        if b & 1:
+            result = q_mul(result, a, n)
+        a = q_mul(a, a, n)
+        b //= 2
+    return result
 
 
 if __name__ == '__main__':
-    print('pow(2, 9, 50)', fastMod(2, 9, 50))
-    print('pow(2, 16, 30)', fastMod(2, 16, 30))
+    print('pow(2, 9, 50)', q_mod(2, 9, 50))
+    print('pow(2, 16, 30)', q_mod(2, 16, 30))

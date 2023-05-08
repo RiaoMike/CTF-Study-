@@ -1,5 +1,5 @@
 import sys
-from fastMod import fastMod
+from fastMod import q_mod
 from time import time
 
 
@@ -10,12 +10,12 @@ s = input('请输入要加密的明文: ')
 start = time()
 
 if s.isnumeric():
-    result = fastMod(int(s), b, n)
+    result = q_mod(int(s), b, n)
     result = str(result)
 else:
     result = ''
     for ch in s:
-        newc = chr(fastMod(ord(ch), b, n))
+        newc = chr(q_mod(ord(ch), b, n))
         result += newc
 
 # print('Ciphertext is:', result)

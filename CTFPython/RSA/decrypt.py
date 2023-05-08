@@ -1,6 +1,6 @@
 # import sys
 # import extended_gcd
-from fastMod import fastMod
+from fastMod import q_mod
 from time import time
 
 
@@ -22,12 +22,12 @@ if cipher == '':
     cipher = 'ciphertext.txt'
 s = open(cipher, 'r', encoding='utf-8').read()
 if s.isnumeric():
-    result = fastMod(int(s), a, n)
+    result = q_mod(int(s), a, n)
     # result = pow(int(s), a) % n
 else:
     result = ''
     for ch in s:
-        oldc = chr(fastMod(ord(ch), a, n))
+        oldc = chr(q_mod(ord(ch), a, n))
         # oldc = chr(pow(ord(ch), a) % n)
         result += oldc
 
