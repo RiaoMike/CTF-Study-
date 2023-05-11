@@ -6,4 +6,5 @@ b = 3
 a = 422550200076147774159667770427
 
 force: ---
-pollar_rho: 460.39s
+pollar_rho: 660.12s
+pollar_rho_Floyd: 460.39s

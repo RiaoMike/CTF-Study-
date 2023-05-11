@@ -1,7 +1,7 @@
 from random import randint
-from extended_gcd import extended_gcd
 from time import time
 from fastMod import q_mul, q_mod
+from extended_gcd import extended_gcd
 times = 2
 
 
@@ -39,29 +39,32 @@ def miller_rabin(n):
             return False
     return True
 
-print(miller_rabin(17))
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
 
-
-# pollard_rho
+# pollard_rho_Floyd
 def pollard_rho(n):
-    if miller_rabin(n):
-        return n, 1
-    fact = 1
-    cycle = 2
+    # if miller_rabin(n):
+    #     return n, 1
+    # 龟兔赛跑，起点相同
     x = y = 2
-    c = randint(1, n)
-    while fact == 1:
-        for i in range(cycle):
+    test = set() # 防止c值重复
+    while True:
+        c = randint(1, n)
+        while c in test:
+            c = randint(1, n)
+        test.add(c)
+        f = lambda x: (x * x + c) % n
+        x = f(x)
+        y = f(f(y))
+        while x != y:
+            fact = gcd(abs(x - y), n)
             if fact > 1:
-                break
-            x = (x * x + c) % n
-            if x == y:
-                c = randint(1, n)
-                continue
-            fact, _, _ = extended_gcd(abs(x - y), n)
-        cycle *= 2
-        y = x
-    return fact, n // fact
+                return fact, n // fact
+            x = f(x)
+            y = f(f(y))
 
 
 p, q = pollard_rho(n)
