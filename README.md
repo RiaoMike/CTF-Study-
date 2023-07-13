@@ -23,3 +23,6 @@ Due to time reasons, I have to skip the simple questions.
 1. [misc-wp](Wp/misc.md)
 2. [crypto-wp](Wp/crypto.md)
 3. [web-wp](Wp/web.md)
+
+# Gdb Usage
+[gdb](gdb.md)
