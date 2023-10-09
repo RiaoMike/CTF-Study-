@@ -14,15 +14,35 @@ If you download the pwntools, you will also get 3. and 4.
 
 ## 3. checksec
 
+1. Canary: Stack protector
+2. NX: no execuable in stack and heap
+3. PIE: 
+...
+
 ## 4. ROPgadget
+
+Use to find the gadgets chains.
+
+```zsh
+pacman -S ROPgadget
+```
+
+### Example
+
+- ROPgadget --binary /path/to/binary_file --only 'pop|ret' | grep eax
+- ROPgadget --binary /path/to/binary_file --string '/bin/sh'
 
 ## 5. gdb(pwndbg)
 
 Dynamic debug
 
+> See the [gdb](./gdb)
+
 ## 6. one_gadget
 
 ## 7. main_arane_offset
+
+---
 
 # Binary Basic
 
@@ -88,6 +108,41 @@ objdump -s elf
 objdump display the disk view, while this diaplay the memory view
 
 
+---
 
+# PWN
 
+## Basic ROP
 
+### Exploit the exist System call
+
+If the program has the stack overflow exploit and there is a system call such as 'system("/bin/sh")' in **.text** section.
+
+We can just overflow the stack to cover the ret IP with where *system call* are.
+
+### ShellCode(NX-disable)
+
+Once start the **gdb**, use **vmmap** command to see the permission of memory, say **rwx**.
+
+If the stack or .bss section have the rwx permission, we can write the shellcode to the memory, and then return to that address to execute it.
+
+> Use **shellcraft** of pwntools to generate shellcode or you can write it by yourself.
+
+### basic rop
+
+Use gadgets of elf file.
+
+In 32bits elf, we need to modify the registers to specific value to call **sys_execve**
+
+- EAX=0xb=11
+- EBX=&('/bin/sh')
+- ECX=EDX=0
+
+> In 64bits, regs are *rdi, rsi, rdx, rcx, r8, r9* and then to stack
+
+And then ret to address of **int 0x80** to call the interrupt. Just like execute the command **sys_execve('/bin/sh', 0, 0)**
+
+A simple payload like this:
+```
+payload = flat(['A'*112, pop_eax_ret, 0xb, pop_edx_ecx_ebx_ret, 0, 0, binsh, int_0x80])
+```
