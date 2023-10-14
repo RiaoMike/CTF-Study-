@@ -72,9 +72,52 @@ linux:**ELF**
 
 header1/2 => {ELF header, Program header table}
 
+header2/2 => {Section Header table}
+
+### ELF header
+
 > ELF header: the whole frame(structure) of the elf file
 
+```bash
+$ readelf -h elf_file
+```
+
+- Magic: 7f 'E' 'L' 'F' class data version pad
+- *Class: 1 for 32, 2 for 64
+- *Data: 1 for little endian, 2 for big endian
+- Version: current_version
+- OS/ABI
+- ABI Version
+- *Type: REL, EXEC, DYN, CORE...
+- Machine: File can exec on which machine
+- *Entry point address: virtual addr where system give the control to elf file.
+- Start of program headers
+- Start of section headers
+- Flags
+- Size of this header
+- Size of program headers
+- Number of program headers
+- Size of section headers
+- Number of section headers
+- Section header string table index
+
+### Program header table(*Execution view*)
+
 > Program header table: segment information
+>
+> A segment contains one or more sections
+
+```bash
+$ readelf -l elf_file
+```
+
+
+
+### Section header table(*Linking view*)
+
+```bash
+$ readelf -S elf_file
+```
 
 section => {Code, Data, Sections' names}
 
@@ -84,7 +127,6 @@ section => {Code, Data, Sections' names}
 
 > Sections' names:  name of the section
 
-header2/2 => {Section Header table}
 
 > Section Header table: section information 
 
@@ -114,13 +156,13 @@ objdump display the disk view, while this diaplay the memory view
 
 ## Basic ROP
 
-### Exploit the exist System call
+### ret2text
 
 If the program has the stack overflow exploit and there is a system call such as 'system("/bin/sh")' in **.text** section.
 
-We can just overflow the stack to cover the ret IP with where *system call* are.
+We can just overflow the stack to cover the ret Address with where *system call* are.
 
-### ShellCode(NX-disable)
+### ret2shellcode(NX-disable)
 
 Once start the **gdb**, use **vmmap** command to see the permission of memory, say **rwx**.
 
@@ -128,7 +170,7 @@ If the stack or .bss section have the rwx permission, we can write the shellcode
 
 > Use **shellcraft** of pwntools to generate shellcode or you can write it by yourself.
 
-### basic rop
+### ret2syscall
 
 Use gadgets of elf file.
 
@@ -146,3 +188,50 @@ A simple payload like this:
 ```
 payload = flat(['A'*112, pop_eax_ret, 0xb, pop_edx_ecx_ebx_ret, 0, 0, binsh, int_0x80])
 ```
+
+### ret2libc
+
+First, we need to get the address of **system** function from *.plt* table. 
+
+> There are three situations here, more details see [ctfwiki](https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/basic-rop/#ret2libc)
+
+---
+
+1. [example1](PwnExample/ret2libc1)
+
+And then, if we can find the "/bin/sh" string using *ROPgadget* tool. Just call the system function with parameter "/bin/sh" to get the shell.
+
+> Note that we have a *0xdeadbeef* between address of system and binsh_addr.
+>
+> See this, when we **call** a function, we first place the parameter where function need and then push the return address of the function.
+>
+> Finally pragram jmp to the address of function to execute it. Distinguish the difference between *call* and *execute*.
+
+Payload like this(32bits):
+
+```python
+payload = flat(['a' * 112, system_plt, 'b' * 4, binsh_addr])
+```
+
+2. [example2](PwnExample/ret2libc2)
+
+This time, we can not find "/bin/sh" string in the program, but we can see the **gets** function in *.plt* table. 
+
+If there are some place we have **w** permission(vmmap), some place like *.bss*. Make use of gets function to write "/bin/sh" to the .bss section.
+
+And then, everything is as simple as the example1.
+
+```python
+payload = flat(['a'*112, gets_plt, pop_ebx, buf2, system_plt, 0xdeadbeef, buf2])
+```
+
+A simple explanation:
+
+- 'a'*112: padding for stack
+- gets_ple: address of gets function to write "/bin/sh"
+- pop_ebx: return address for the **call** of gets
+- buf2: **parameter** for the gets, it's address where "/bin/sh" write to.
+- system_plt: 
+
+
+
