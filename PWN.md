@@ -222,16 +222,50 @@ If there are some place we have **w** permission(vmmap), some place like *.bss*.
 And then, everything is as simple as the example1.
 
 ```python
-payload = flat(['a'*112, gets_plt, pop_ebx, buf2, system_plt, 0xdeadbeef, buf2])
+payload = flat(['a'*112, gets_plt, pop_ebx_ret, buf2, system_plt, 0xdeadbeef, buf2])
 ```
 
 A simple explanation:
 
 - 'a'*112: padding for stack
 - gets_ple: address of gets function to write "/bin/sh"
-- pop_ebx: return address for the **call** of gets
+- pop_ebx_ret: return address for the **call** of gets in order to pop the buf address and execute the system function
 - buf2: **parameter** for the gets, it's address where "/bin/sh" write to.
-- system_plt: 
+- system_plt: system function address
+- 0xdeadbeef: return address of system, but it's useless, just padding.
+- buf2: the parameter of system function to execve system('/bin/sh')
 
+Another elaborate payload is
+
+```python
+payload = flat(['a'*112, gets_plt, system_plt, buf2, buf2])
+```
+
+This time, we can directly place the system_plt on the return address of the gets_plt, understand it by yourself.
+
+3. [example3](PwnExample/ret2libc3)
+
+If we want to utilize the system function, which program did't give us, how to get the address from libc.
+
+We need two prerequisite knowledge:
+
+1. system function belong to libc, and the offset between all function in libc.so dynamic link library is fixed.
+2. Even if the program open the ASLR protector, it only randomize middle position of the address, while the lowest 12 bits remain unchange.
+
+That means if we get a (func_name, func_address) of libc established, we can deduce out the version of libc as well as all offset between functions.
+
+Due to the libc's **Lazy Binding**, we need to leak the address of funcntion which has already been executed. 
+
+We usually use the address leak of **__libc_start_main** and a useful tool call **LibcSearcher**.
+
+Exploitation Steps:
+
+1. Leaked the __libc_start_main address
+2. Get the version of libc
+3. Get the address of *system* and *'/bin/sh'*
+4. Execute the program again(return to main)
+5. Trigger the stack overflow to execute system('/bin/sh')
+
+An  
 
 
