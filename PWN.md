@@ -197,7 +197,7 @@ First, we need to get the address of **system** function from *.plt* table.
 
 ---
 
-1. [example1](PwnExample/ret2libc1)
+1. [example1](PwnFile/ret2libc1)
 
 And then, if we can find the "/bin/sh" string using *ROPgadget* tool. Just call the system function with parameter "/bin/sh" to get the shell.
 
@@ -213,7 +213,7 @@ Payload like this(32bits):
 payload = flat(['a' * 112, system_plt, 'b' * 4, binsh_addr])
 ```
 
-2. [example2](PwnExample/ret2libc2)
+2. [example2](PwnFile/ret2libc2)
 
 This time, we can not find "/bin/sh" string in the program, but we can see the **gets** function in *.plt* table. 
 
@@ -243,7 +243,7 @@ payload = flat(['a'*112, gets_plt, system_plt, buf2, buf2])
 
 This time, we can directly place the system_plt on the return address of the gets_plt, understand it by yourself.
 
-3. [example3](PwnExample/ret2libc3)
+3. [example3](PwnFile/ret2libc3)
 
 If we want to utilize the system function, which program did't give us, how to get the address from libc.
 

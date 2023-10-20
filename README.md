@@ -3,8 +3,10 @@ Some notes while learning ctf
 
 ---
 
-There are five categories in total, but reverse and pwn are not included here.
-I'll study them days later.
+There are five categories in total.
+
+This time I have opened the gate of pwn, it's interesting.
+
 
 # [Misc](Misc.md)
 
@@ -18,11 +20,11 @@ I'll study them days later.
 
 # Wp
 Here are writeup for some exercise.
-Due to time reasons, I have to skip the simple questions.
 
 1. [misc-wp](Wp/misc.md)
 2. [crypto-wp](Wp/crypto.md)
 3. [web-wp](Wp/web.md)
+4. [pwn-wp](Wp/pwn.md)
 
 # Gdb Usage
 [gdb](gdb.md)
