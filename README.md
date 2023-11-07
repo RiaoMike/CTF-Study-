@@ -26,5 +26,7 @@ Here are writeup for some exercise.
 3. [web-wp](Wp/web.md)
 4. [pwn-wp](Wp/pwn.md)
 
-# Gdb Usage
+# Useful Things
 [gdb](gdb.md)
+
+some [function](c_function.md) while doing *PWN*
