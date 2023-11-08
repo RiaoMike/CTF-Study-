@@ -52,4 +52,24 @@ sh.sendlineafter(b'Input:', payload)
 sh.interactive()
 ```
 
-## 2. 
+## 2. ciscn_2019_c_1
+
+From: buuctf
+
+click [here](../PwnFile/ciscn_2019_c_1) to download.
+
+It's type of **ret2libc**.
+
+I think only two questions need to pay attention.
+
+1. leak libc
+
+The libc functions' address often have a length of **0x6** at 64bits machines. But when we use **puts** to leak the address, it stops at '\x00', so it only puts out the little six bytes(little-endian).
+
+Otherwise we need to use `sh.recv(6).ljust(0x8, b'\x00')` instead of `sh.recv(8)`
+
+2. The environment is Ubuntu18, and all versions after that should follow the **Stack Alignment**. That means we need to add a *ret* to make system_addr align to 0x10.
+
+More details see [here](https://www.cnblogs.com/ZIKH26/articles/15996874.html).
+
+And [here](../Shellcode/ciscn.py) are exp.

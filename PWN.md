@@ -154,6 +154,10 @@ objdump display the disk view, while this diaplay the memory view
 
 # PWN
 
+Writing before everything
+
+Due to the Local environment are different from the remote side, we need to remember **Stack Alignment** all the time at local debugging. However, this is not demanded for remote environment sometimes.
+
 ## Basic ROP
 
 ### ret2text
@@ -265,7 +269,5 @@ Exploitation Steps:
 3. Get the address of *system* and *'/bin/sh'*
 4. Execute the program again(return to main)
 5. Trigger the stack overflow to execute system('/bin/sh')
-
-An  
 
 
