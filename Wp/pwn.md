@@ -73,3 +73,26 @@ Otherwise we need to use `sh.recv(6).ljust(0x8, b'\x00')` instead of `sh.recv(8)
 More details see [here](https://www.cnblogs.com/ZIKH26/articles/15996874.html).
 
 And [here](../Shellcode/ciscn.py) are exp.
+
+## 3. not_the_same_3dsctf_2016
+
+From: buuctf
+
+click [here](../PwnFile/not_the_same_3dsctf_2016) to download.
+
+It's a 32bits static-linked file, don't have canary  
+IDA to see the main functions
+
+We can use **gets** to make stack overflow.  
+The main point is the **get_secret** function that printf the flag to *fl4g*, which is in .bss section
+
+> It's clear that we need to print the flag.(with function *printf*, *write*, *fputs*...)
+
+Here are some attentions
+
+- You don't need to cover the **ebp** due to the source assemble code
+- *printf* must followed with *exit*, it will print the content only while meeting '\n' or buffer overflowed or process exit
+
+shellcode for [printf](../Shellcode/not_the_same_3dsctf_2016.py)  
+
+To use function *write*, see [here](https://zhuanlan.zhihu.com/p/648701544)
